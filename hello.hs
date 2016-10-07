@@ -134,12 +134,42 @@ rightTriangles' = [ (a,b,c) | c <- [1..10], b <- [1..10], a <- [1..10],
 
 --first10FibNumbers
 
-getNextInFib a b = a + b 
-
--- try recursion
+-- Euler2 recursion
 -- want to count up until base case (max value) is reached
 fib a b =
     if a > 89
-        -- base case of the recursion.. stop at 89
+        -- base case of the recursion.. stop at max (eg 89)..return empty list
         then [] 
+        -- cons operator add a to start of list
         else a : fib b (a+b) 
+
+fib' a b =
+    if a > 4000000
+        -- base case of the recursion.. stop at max (eg 89)..return empty list
+        then [] 
+        -- cons operator add a to start of list
+        else a : fib' b (a+b) 
+
+fib'' a b =
+    --4m
+    if a > 4000000
+        -- base case of the recursion.. stop at max (eg 89)..return empty list
+        then [] 
+        -- cons operator add a to start of list
+        else a : fib'' b (a+b) 
+
+--4613732
+-- n = sum[x | x <- fib' 1 2, x `mod` 2 == 0]
+n' = sum[x | x <- fib' 1 2, even x]
+
+-- Euler2 shifting a list left by one an adding to itself
+-- http://stackoverflow.com/questions/26497410/project-euler-2-solution-from-the-haskell-wiki
+-- https://wiki.haskell.org/Euler_problems/1_to_10#Problem_2
+-- o :: Integer
+-- fibs :: [Integer]
+fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
+
+--4613732
+o = sum [ x | x <- takeWhile (< 4000000) fibs, even x]
+
+p = [ x | x <- takeWhile (< 4000000) fibs]
