@@ -35,7 +35,7 @@ multOf5 = [5,10..30]
 -- how to do a union (but what about 15..double?)
 -- then just do a sum
 
--- Try with filtering
+-- List comprehension (output function is before the pipe)
 -- filtering (weeding out lists by predicates)
 h = sum [x | x <- [1..999], x `mod` 3 == 0 || x `mod` 5 == 0]
 
