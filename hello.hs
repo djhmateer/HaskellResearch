@@ -100,3 +100,13 @@ g = [x*2 | x <- [1..10]]
 h = [x*2 | x <- [1..10], x*2 >= 12]
 
 -- filtering (weeding out lists by predicates)
+
+-- a list
+i = [[1,2],[8,11,5],[4,5]]
+-- get first element [1,2] from list
+j = head i
+
+-- a tuple
+k = (1,2)
+-- a list of tuples
+l = [(1,2),(8,11,5),(4,5)]
