@@ -101,14 +101,14 @@ h = [x*2 | x <- [1..10], x*2 >= 12]
 
 
 -- a list
-i = [[1,2],[8,11,5],[4,5]]
--- get first element [1,2] from list
-j = head i
+-- i = [[1,2],[8,11,5],[4,5]]
+-- -- get first element [1,2] from list
+-- j = head i
 
 -- a tuple
-k = (1,2)
--- a list of tuples
-l = [(1,2),(8,11,5),(4,5)]
+-- k = (1,2)
+-- -- a list of tuples
+-- l = [(1,2),(8,11,5),(4,5)]
 
 -- filtering (weeding out lists by predicates)
 
@@ -184,3 +184,16 @@ fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 o = sum [ x | x <- takeWhile (< 4000000) fibs, even x]
 
 p = [ x | x <- takeWhile (< 4000000) fibs]
+
+-- Euler 3
+-- The prime factors of 13195 are 5, 7, 13 and 29.
+-- What is the largest prime factor of the number 600851475143 ?
+
+
+facs q =  [x | x <- [3..floor (sqrt (fromIntegral (q)))], q `mod` x  == 0, isPrime x, odd x ]
+q = facs 13195
+r = facs 600851475143
+-- number is prime if only divisible by 1 and itself
+f' = floor (sqrt (fromIntegral 10))
+-- 6857
+isPrime num = [x | x <- [3..floor (sqrt (fromIntegral (num)))], num `mod` x == 0, odd x] == []
