@@ -99,7 +99,6 @@ g = [x*2 | x <- [1..10]]
 -- only want elements which when doubled are >= 12
 h = [x*2 | x <- [1..10], x*2 >= 12]
 
-
 -- a list
 -- i = [[1,2],[8,11,5],[4,5]]
 -- -- get first element [1,2] from list
@@ -161,16 +160,7 @@ fib' a b =
         -- cons operator add a to start of list
         else a : fib' b (a+b) 
 
-fib'' a b =
-    --4m
-    if a > 4000000
-        -- base case of the recursion.. stop at max (eg 89)..return empty list
-        then [] 
-        -- cons operator add a to start of list
-        else a : fib'' b (a+b) 
-
 --4613732
--- n = sum[x | x <- fib' 1 2, x `mod` 2 == 0]
 n' = sum[x | x <- fib' 1 2, even x]
 
 -- Euler2 shifting a list left by one an adding to itself
@@ -189,11 +179,31 @@ p = [ x | x <- takeWhile (< 4000000) fibs]
 -- The prime factors of 13195 are 5, 7, 13 and 29.
 -- What is the largest prime factor of the number 600851475143 ?
 
-
-facs q =  [x | x <- [3..floor (sqrt (fromIntegral (q)))], q `mod` x  == 0, isPrime x, odd x ]
-q = facs 13195
-r = facs 600851475143
 -- number is prime if only divisible by 1 and itself
-f' = floor (sqrt (fromIntegral 10))
--- 6857
+-- only need check up to the sqrt of number to see if it can be divided with remainder of 0
 isPrime num = [x | x <- [3..floor (sqrt (fromIntegral (num)))], num `mod` x == 0, odd x] == []
+
+-- only need to check factors up to sqrt, as we know prime can't be bigger than this
+facs q =  [x | x <- [3..floor (sqrt (fromIntegral (q)))], q `mod` x  == 0, isPrime x, odd x ]
+
+q = facs 13195
+-- 6857
+r = facs 600851475143
+
+-- Euler 4
+--A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+--Find the largest palindrome made from the product of two 3-digit numbers.
+
+t = maximum [x*y | x <- [100..999], y <- [100..999], isPalindrome (x*y)]
+isPalindrome num = show num == reverse (show num) 
+
+u = reverse [1,2,3,4]
+
+-- int to string
+v = show 345
+-- string to int
+w = read "345" :: Int
+
+-- can reverse the string (as it is a list of chars really)
+u' = reverse "1234"
+z = reverse v
