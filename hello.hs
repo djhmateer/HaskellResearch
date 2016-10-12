@@ -207,3 +207,30 @@ w = read "345" :: Int
 -- can reverse the string (as it is a list of chars really)
 u' = reverse "1234"
 z = reverse v
+
+-- Euler 5
+--2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+--What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+isDivisibleBy1To10 num = length [x | x <- [1..10], num `mod` x == 0] == 10
+isDivisibleBy1To20 num = length [x | x <- [1..20], num `mod` x == 0] == 20
+-- isDivisibleBy1To20 num = [x | x <- [1..20], num `mod` x /= 0] == []
+
+aa = isDivisibleBy1To10 2520
+ab = isDivisibleBy1To10 11
+ac = isDivisibleBy1To10 12
+
+-- works, returning a list of answers
+ad = head [x | x <- [10,20..], isDivisibleBy1To10 x]
+-- 353s result - 232792560
+ae = head [x | x <- [20,40..], isDivisibleBy1To20 x]
+
+-- 19s or so
+-- :set +s - to get timings in repl
+-- http://stackoverflow.com/questions/6968076/project-euler-a-much-better-way-to-solve-problem-5
+-- I know it is divisible by 5,10,20 
+pe5 = head [x|x<-[40,60..],x`mod`3==0,x`mod`4==0,x`mod`6==0,x`mod`7==0,x`mod`8==0,x`mod`9==0,x`mod`11==0,x`mod`12==0,x`mod`13==0,x`mod`14==0,x`mod`15==0,x`mod`16==0,x`mod`17==0,x`mod`18==0,x`mod`19==0] 
+
+-- Euler 5 - Strategy 2
+-- somehow break out if it is divisible
+-- recursion?
