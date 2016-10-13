@@ -231,6 +231,50 @@ ae = head [x | x <- [20,40..], isDivisibleBy1To20 x]
 -- I know it is divisible by 5,10,20 
 pe5 = head [x|x<-[40,60..],x`mod`3==0,x`mod`4==0,x`mod`6==0,x`mod`7==0,x`mod`8==0,x`mod`9==0,x`mod`11==0,x`mod`12==0,x`mod`13==0,x`mod`14==0,x`mod`15==0,x`mod`16==0,x`mod`17==0,x`mod`18==0,x`mod`19==0] 
 
--- Euler 5 - Strategy 2
--- somehow break out if it is divisible
--- recursion?
+-- 30s
+pe5' = head [x | x<-[40,60..], all (\y -> x`mod`y == 0) [2..20] ]
+-- 20s
+pe5'' = head [x | x<-[40,60..], all (\y -> x`mod`y == 0) [11..19] ]
+
+
+-- least common multiple
+-- 60
+af = lcm 10 12
+
+-- 0.02s
+euler5 = foldl lcm 2 [3..20]
+
+--Euler6
+-- The sum of the squares of the first ten natural numbers is,
+-- 1^2 + 2^2 + ... + 10^2 = 385
+-- The square of the sum of the first ten natural numbers is,
+-- (1 + 2 + ... + 10)^2 = 55^2 = 3025
+-- Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
+-- Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+
+-- 385
+sumOfSquares = sum [x*x | x <- [1..100]]
+-- 3025
+squareOfSums = (sum [x | x <- [1..100]])^2
+-- 2640
+diff = squareOfSums - sumOfSquares
+
+-- https://wiki.haskell.org/Euler_problems/1_to_10#Problem_6
+-- 3025
+ag = (sum [1..10])^2
+
+-- Euler 7
+-- By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+-- What is the 10 001st prime number?
+-- isPrime' num = [x | x <- [3..floor (sqrt (fromIntegral (num)))], num `mod` x == 0, odd x] == []
+-- isPrime' num = [x | x <- [2..num-1], num `mod` x == 0] == []
+isPrime' num = [x | x <- [2..floor (sqrt (fromIntegral (num)))], num `mod` x == 0] == []
+
+-- [2,3,5,7,11,13]
+primeChecker = [x | x <- [2..15], isPrime' x]
+
+-- 13
+ai = [x | x <- [1,2..], isPrime' x]!!6
+-- 104743
+aj = [x | x <- [1,2..], isPrime' x]!!10001
+
