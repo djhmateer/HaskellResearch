@@ -300,11 +300,8 @@ ap nums =
         --else (2 * (head nums)) : (double (tail nums))
         -- this worked for 4 adjacent
         --else (nums!!0*nums!!1*nums!!2*nums!!3) : (ap (tail nums))
-        else (nums!!0*nums!!1*nums!!2*nums!!3*nums!!4*nums!!5*nums!!6*nums!!7*nums!!8*nums!!9*nums!!10*nums!!11*nums!!12) : (ap (tail nums))
+        -- else (nums!!0*nums!!1*nums!!2*nums!!3*nums!!4*nums!!5*nums!!6*nums!!7*nums!!8*nums!!9*nums!!10*nums!!11*nums!!12) : (ap (tail nums))
+        else (product (take 13 nums)) : (ap (tail nums))
 
 -- 23514624000
 aq = maximum (ap al)
-
-
-
-
