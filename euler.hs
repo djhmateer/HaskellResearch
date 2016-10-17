@@ -12,8 +12,6 @@ h = sum [x | x <- [1..999], x `mod` 3 == 0 || x `mod` 5 == 0]
 -- 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 -- By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
---first10FibNumbers
-
 -- Euler2 recursion
 -- want to count up until base case (max value) is reached
 fib a b =
@@ -42,8 +40,8 @@ fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 
 --4613732
 o = sum [ x | x <- takeWhile (< 4000000) fibs, even x]
-
 p = [ x | x <- takeWhile (< 4000000) fibs]
+
 
 -- Euler 3
 -- The prime factors of 13195 are 5, 7, 13 and 29.
@@ -51,21 +49,34 @@ p = [ x | x <- takeWhile (< 4000000) fibs]
 
 -- number is prime if only divisible by 1 and itself
 -- only need check up to the sqrt of number to see if it can be divided with remainder of 0
-isPrime num = [x | x <- [3..floor (sqrt (fromIntegral (num)))], num `mod` x == 0, odd x] == []
+-- isPrime num = [x | x <- [3..floor (sqrt (fromIntegral (num)))], num `mod` x == 0, odd x] == []
+
+-- x 35 = 6
+-- x 144 = 12
+x num = ceiling (sqrt (fromIntegral (num)))
+-- If result set is empty isPrime = True
+isPrime num = [x | x <- [2..ceiling (sqrt (fromIntegral (num)))], num `mod` x == 0] == []
 
 -- only need to check factors up to sqrt, as we know prime can't be bigger than this
 facs q =  [x | x <- [3..floor (sqrt (fromIntegral (q)))], q `mod` x  == 0, isPrime x, odd x ]
 
+-- [5, 7, 13, 29]
 q = facs 13195
--- 6857
+-- [71,839,1471,6857]
 r = facs 600851475143
+
 
 -- Euler 4
 --A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 --Find the largest palindrome made from the product of two 3-digit numbers.
 
-t = maximum [x*y | x <- [100..999], y <- [100..999], isPalindrome (x*y)]
+-- 9009
+t = maximum [x*y | x <- [10..99], y <- [10..99], isPalindrome (x*y)]
 isPalindrome num = show num == reverse (show num) 
+
+-- 906609
+t' = maximum [x*y | x <- [100..999], y <- [100..999], isPalindrome (x*y)]
+
 
 u = reverse [1,2,3,4]
 
