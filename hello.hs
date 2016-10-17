@@ -292,14 +292,24 @@ ap nums =
     if (length nums)==12
         -- base case of recursion
         then []
+        --else (nums!!0*nums!!1*nums!!2*nums!!3) : (ap (tail nums))
+        -- else (nums!!0*nums!!1*nums!!2*nums!!3*nums!!4*nums!!5*nums!!6*nums!!7*nums!!8*nums!!9*nums!!10*nums!!11*nums!!12) : (ap (tail nums))
         -- take first 13 numbers and multiply
         else (product(take 13 nums)) : (ap (tail nums))
 
 -- 23514624000
 aq = maximum (ap al)
 
-import Data.List (tails)
-ar = maximum map (product . take 5) (tails aq)
+-- Euler 9
+-- A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+-- a^2 + b^2 = c^2
+-- For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
+-- There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+-- Find the product abc.
 
+--t = maximum [x*y | x <- [100..999], y <- [100..999], isPalindrome (x*y)]
+--find list of numbers where a + b + c = 100
+-- zd = [a | a <- [1..998], b <- [1..998], c <- [1..998], (a + b + c = 1000), (a < b < c)]
 
-
+--find list of numbers where a + b + c = 100
+zd = [a | a <- [1..998], b <- [1..998], c <- [1..998], (a + b + c) == 1000, a < b, b < c]
