@@ -287,24 +287,19 @@ am = [x+1 | x <- al]
 an = take 4 al
 -- returns the product of a list ie 7*3*1*6
 ao = product (take 4 al)
--- hmm need some way to iterate over a list
--- use recursion??
--- with !! index value?
 
 ap nums =
-    --if null nums
     if (length nums)==12
         -- base case of recursion
         then []
-        -- take first element, double it, then add to front of new list
-        --else (2 * (head nums)) : (double (tail nums))
-        -- this worked for 4 adjacent
-        --else (nums!!0*nums!!1*nums!!2*nums!!3) : (ap (tail nums))
-        else (nums!!0*nums!!1*nums!!2*nums!!3*nums!!4*nums!!5*nums!!6*nums!!7*nums!!8*nums!!9*nums!!10*nums!!11*nums!!12) : (ap (tail nums))
+        -- take first 13 numbers and multiply
+        else (product(take 13 nums)) : (ap (tail nums))
 
 -- 23514624000
 aq = maximum (ap al)
 
+import Data.List (tails)
+ar = maximum map (product . take 5) (tails aq)
 
 
 
