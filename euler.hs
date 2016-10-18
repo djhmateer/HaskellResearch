@@ -85,19 +85,12 @@ facs'' num =  [x | x <- [3..floor(sqrt (fromIntegral num))], num `mod` x  == 0, 
 s = facs'' 600851475143
 
 
-
 -- Euler 4
---A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
---Find the largest palindrome made from the product of two 3-digit numbers.
+-- A palindromic number reads the same both ways. 
+-- The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+-- Find the largest palindrome made from the product of two 3-digit numbers.
 
--- 9009
-t = maximum [x*y | x <- [10..99], y <- [10..99], isPalindrome (x*y)]
-isPalindrome num = show num == reverse (show num) 
-
--- 906609
-t' = maximum [x*y | x <- [100..999], y <- [100..999], isPalindrome (x*y)]
-
-
+-- [4,3,2,1]
 u = reverse [1,2,3,4]
 
 -- int to string
@@ -108,6 +101,16 @@ w = read "345" :: Int
 -- can reverse the string (as it is a list of chars really)
 u' = reverse "1234"
 z = reverse v
+
+-- 9009
+t = maximum [x*y | x <- [10..99], y <- [10..99], isPalindrome (x*y)]
+-- int to string, reverse int to string ie compare 2 strings
+isPalindrome num = show num == reverse (show num) 
+
+-- 906609
+t' = maximum [x*y | x <- [100..999], y <- [100..999], isPalindrome (x*y)]
+
+
 
 -- Euler 5
 --2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
