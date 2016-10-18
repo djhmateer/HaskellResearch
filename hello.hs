@@ -169,3 +169,37 @@ multOf5 = [5,10..30]
 
 -- how to do a union (but what about 15..double?)
 -- then just do a sum
+
+
+-- implementing own version of length (of a list)
+-- _ means we don't care what we draw from the list.
+-- replace every element of a list with 1, then sum
+length' xs = sum [1 | _ <- xs] 
+
+-- 4
+o = length' [1,2,3,4]
+
+-- 8
+p = fst (8,11) 
+-- "Wow"
+q = fst ("Wow", False)
+
+-- Which right triangle that has integers for all sides and all sides equal to or 
+-- smaller than 10 has a perimeter of 24?
+-- a^2 + b^2 = c^2
+-- eg 3,4,5 triangle.. perimeter = 12
+-- 9 + 16 = 25
+
+-- generate numbers for all sides outputting a Tuple
+r = [(a,b,c) | a <- [1..10], b <- [1..10], c <- [1..10], a^2 + b^2 == c^2, a+b+c==24]
+
+-- 10/3 gives 1 as a remainder
+s = mod 10 3
+-- backtick infix style gives 1 as a remainder
+t = 10 `mod` 3
+
+-- [3,5,7,11]
+favNums = 3:5:7:11:[]
+
+-- [7,9,11,13,15]
+sumOfLists = zipWith (+) [1,2,3,4,5] [6,7,8,9,10]

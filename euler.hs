@@ -36,11 +36,19 @@ n' = sum[x | x <- fib' 1 2, even x]
 -- https://wiki.haskell.org/Euler_problems/1_to_10#Problem_2
 -- o :: Integer
 -- fibs :: [Integer]
+
+-- [7,9,11,13,15]
+sumOfLists = zipWith (+) [1,2,3,4,5] [6,7,8,9,10]
+
+-- zipWith adds 2 lists together
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
+
+-- [1,1,2,3,5,8,13,21,34,55,89,144,233,377]
+qq = takeWhile (< 4000000) fibs
 
 --4613732
 o = sum [ x | x <- takeWhile (< 4000000) fibs, even x]
-p = [ x | x <- takeWhile (< 4000000) fibs]
+
 
 
 -- Euler 3
@@ -59,7 +67,8 @@ p = [ x | x <- takeWhile (< 4000000) fibs]
 -- getting the square root as an int
 -- x 35 = 5
 -- x 144 = 12
-x num = floor (sqrt (fromIntegral num))
+--x num = floor (sqrt (fromIntegral num))
+x num = round (sqrt num)
 
 -- If result set is empty isPrime = True
 isPrime num = [x | x <- [2..floor (sqrt (fromIntegral num))], num `mod` x == 0] == []
@@ -215,9 +224,11 @@ aq = maximum (ap al)
 --find list of numbers where a + b + c = 100
 -- zd = [a | a <- [1..998], b <- [1..998], c <- [1..998], (a + b + c = 1000), (a < b < c)]
 
+
 --find list of numbers where a + b + c = 100
 zd = [a | a <- [1..998], b <- [1..998], c <- [1..998], (a + b + c) == 1000, a < b, b < c]
 
+-- **USE a Tuple here??**
 
 
 
