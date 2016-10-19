@@ -203,3 +203,55 @@ favNums = 3:5:7:11:[]
 
 -- [7,9,11,13,15]
 sumOfLists = zipWith (+) [1,2,3,4,5] [6,7,8,9,10]
+
+
+-- Find the element at index k in list l
+-- For example: "findK 2 [0,0,1,0,0,0]" returns 1
+findK k l = undefined
+
+u = [0,0,1,0,0,0]!!2
+
+findK' l nums = nums!!l
+v = findK' 2 [0,0,1,0,0,0]
+
+
+-- 2
+-- determine if list l is a palindrome
+-- palindrome is the same forward as reversed
+
+isPalindrome l = l == reverse l
+
+w = isPalindrome "abba"
+-- reverse
+
+
+-- 3
+{-
+ - Duplicate the elements in list xs, for example "duplicate [1,2,3]" would give the list [1,1,2,2,3,3]
+ - Hint: The "concat [l]" function flattens a list of lists into a single list. 
+ - (You can see the function definition by typing ":t concat" into the interpreter. Perhaps try this with other variables and functions)
+ -
+ - For example: concat [[1,2,3],[3,4,5]] returns [1,2,3,3,4,5]
+ -}
+-- duplicate xs = undefined
+
+--aa = sort (concat [[1,2,3],[1,2,3]])
+
+--concat [[1,1],[2,2], [3,3]]
+
+duplicate xs = concat [[x,x] | x <- xs]
+
+duplicate' xs = xs >>= \x -> [x,x]
+
+-- 4
+{-
+ - Imitate the functinality of zip
+ - The function "min x y" returns the lower of values x and y
+ - For example "ziplike [1,2,3] ['a', 'b', 'c', 'd']" returns [(1,'a'), (2, 'b'), (3, 'c')]
+ -}
+-- ziplike xs ys = undefined
+
+-- use min to get the number of elements
+--ab = min ((length [1,2,3]) length(['a', 'b', 'c', 'd']))
+
+ziplike xs ys = [(xs!!i,ys!!i) | i <- [0..(min (length xs) (length ys)-1)]]
