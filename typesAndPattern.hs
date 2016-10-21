@@ -34,6 +34,16 @@ addThree x y z = x + y + z
 -- fst :: (a, b) -> a 
 
 -- 2. Type Classes
+-- like interfaces
+-- eg Eq is a typeclass
+
+
+-- :t (==)  
+-- (==) :: (Eq a) => a -> a -> Bool 
+-- Everthing before the => is a class construct
+-- The equality function takes any two values that of the same type
+-- and returns a Bool.  The type of the those two values must bve a memver
+-- of the Eq class
 
 -- "3"
 c = show 3
@@ -63,7 +73,7 @@ fac n =
         else n * fac (n-1) 
 f = fac 4
 
-factorial :: (Integral a) => a -> a
+--factorial :: (Integral a) => a -> addThree
 -- just like recursion above  
 factorial 0 = 1  
 factorial n = n * factorial (n - 1)  
@@ -73,7 +83,7 @@ g = factorial 4
 -- a list of tuples
 xs = [(1,3), (4,3), (2,4), (5,3), (5,6), (3,1)]  
 -- [4,7,6,8,11,4]
--- pattern match in list comprehension?
+-- pattern match in list comprehension.. but it will always pass a,b in this case
 h = [a+b | (a,b) <- xs]
 
 tell :: (Show a) => [a] -> String  
@@ -85,3 +95,86 @@ tell (x:y:_) = "This list is long. The first two elements are: " ++ show x ++ " 
 -- i = tell []
 j = tell ["thing"] 
 k = tell ["thing", "thing2"]
+
+
+head' :: [a] -> a  
+head' [] = error "Can't call head on an empty list, dummy!"
+-- x:xs pattern.. only matches to lists of length 1 or more  
+head' (x:_) = x
+
+l = head' [4,5,6]
+-- 4
+
+m = head' "Hello"
+-- 'H'
+
+-- length' :: (Num b) => [a] -> b  
+length' [] = 0  
+length' (_:xs) = 1 + length' xs  
+
+n = length' [1,2,3,4]
+-- 4
+
+-- sum' :: (Num a) => [a] -> a  
+sum' [] = 0  
+sum' (x:xs) = x + sum' xs  
+
+o = sum' [1,2,3,4]
+
+-- as pattern
+-- capital :: String -> String  
+capital "" = "Empty string, whoops!"  
+--capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]  
+capital (x:xs) = "The first letter of " ++ (x:xs) ++ " is " ++ [x]
+
+p = capital "Dracula"
+
+-- Guards
+-- indicated by pipes
+-- usually indented
+-- basicallyl a bool expression.. if else tree :-) far better and more readable
+bmiTell :: (RealFloat a) => a -> String  
+bmiTell bmi  
+    | bmi <= 18.5 = "You're underweight, you emo, you!"  
+    | bmi <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"  
+    | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"  
+    | otherwise   = "You're a whale, congratulations!"  
+
+q = bmiTell 24 
+-- "You're supposedly normal. Pffft, I bet you're ugly!"  
+
+-- guard and function
+bmiTell' :: (RealFloat a) => a -> a -> String  
+bmiTell' weight height  
+    | weight / height ^ 2 <= 18.5 = "You're underweight, you emo, you!"  
+    | weight / height ^ 2 <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"  
+    | weight / height ^ 2 <= 30.0 = "You're fat! Lose some weight, fatty!"  
+    | otherwise                 = "You're a whale, congratulations!" 
+
+r = bmiTell' 85 1.90
+-- "You're supposedly normal. Pffft, I bet you're ugly!"
+
+max' :: (Ord a) => a -> a -> a  
+max' a b   
+    | a > b     = a  
+    | otherwise = b 
+
+s = max' 8 5
+-- 8
+
+-- where bindings
+
+bmiTell'' :: (RealFloat a) => a -> a -> String  
+bmiTell'' weight height  
+    | bmi <= 18.5 = "You're underweight, you emo, you!"  
+    | bmi <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"  
+    | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"  
+    | otherwise   = "You're a whale, congratulations!"  
+    where bmi = weight / height ^ 2
+
+t = bmiTell'' 85 1.90
+
+
+-- let bindings
+
+-- case expressions
