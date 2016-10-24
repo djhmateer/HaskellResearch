@@ -9,8 +9,10 @@
 
 -- maps from a string to a string
 -- 1 string as parameter, 1 string as result
+-- a list of [Char] is a String!
 -- removeNonUppercase :: [Char] -> [Char]
-removeNonUppercase :: String -> String    
+removeNonUppercase :: String -> String
+-- list comprehension that takes a String and returns a String    
 removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]  
 
 -- return type is last item
@@ -23,18 +25,18 @@ addThree x y z = x + y + z
 -- Float - single precision
 -- Double - double
 
--- 1. Type variables
+-- 1. Type variables (not a capital case, so a can be anything).. like generics
+-- functions that have type variables are called polymorphic functions
 -- ghci> :t head  
 -- head :: [a] -> a
 -- becuase not a capital, a is a type variable.. a can be any type
--- like generics
 
 -- fst has a type Tuple of 1 types a and b, and returns and element type a
 -- ghci> :t fst  
 -- fst :: (a, b) -> a 
 
--- 2. Type Classes
--- like interfaces
+
+-- 2. Type Classes (like interfaces)
 -- eg Eq is a typeclass
 
 
@@ -56,8 +58,12 @@ a = read "8" + 5
 b = read "5" :: Int
 
 
+
 -- Pattern Matching
-lucky :: (Integral a) => a -> String  
+-- when defining fuctions, you can define separate function bodies for different patterns
+lucky :: (Integral a) => a -> String
+-- as we're defining a pattern below eg 7, then we need an Eq to match, so typeclass (interface)  
+-- lucky :: a -> String
 lucky 7 = "LUCKY NUMBER SEVEN!"  
 lucky x = "Sorry, you're out of luck, pal!"  
 
