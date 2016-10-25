@@ -79,7 +79,7 @@ fac n =
         else n * fac (n-1) 
 f = fac 4
 
---factorial :: (Integral a) => a -> addThree
+factorial :: (Integral a) => a -> a
 -- just like recursion above  
 factorial 0 = 1  
 factorial n = n * factorial (n - 1)  
