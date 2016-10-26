@@ -72,7 +72,7 @@ qq = takeWhile (< 4000000) fibs
 o = sum [ x | x <- takeWhile (< 4000000) fibs, even x]
 
 -- Euler 2 Pattern Match 
-fibs' :: (Integral a) => a -> a -> [a]
+-- fibs' :: (Integral a) => a -> a -> [a]
 -- Pattern match with a guard
 fibs' a b
     | a > 4000000 = []
@@ -80,8 +80,6 @@ fibs' a b
 
 --4613732
 n'' = sum[x | x <- fibs' 1 2, even x]
-
-
 
 -- Euler 3
 -- The prime factors of 13195 are 5, 7, 13 and 29.
@@ -138,13 +136,22 @@ s = facs'' 600851475143
 --         -- cons operator add a to start of list
 --         else a : fib b (a+b) 
 
--- Euler 3 Pattern Matching
+-- Euler 3 Pattern Matching **not fully explained**
 -- https://gist.github.com/dalbz/1166937
+-- seems to give the correct answer
+-- n is number to find factors of
+-- d is current divisor?
+-- hmm - interesting maths... not fully explained.
 factor n d 
+   -- base case.  If got up to number, then exit eg 7
    | n == d = n
+   -- d is a factor of n.
    | mod n d == 0 = factor (div n d) d
    | n > d = factor n (d+1)
+   -- found an answer
    | otherwise = n
+-- 7
+dc = factor 7 2
 -- 6857
 da = factor 600851475143 2
 -- 29
@@ -152,21 +159,22 @@ da' = factor 13195 2
 -- 2 
 db = factor 16 2
 
--- **HERE** http://brainbleed.me/euler-problem-3
-
-
 
 -- Euler 4
 -- A palindromic number reads the same both ways. 
--- The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+-- The largest palindrome made from the product of 
+-- two 2-digit numbers is 9009 = 91 × 99.
 -- Find the largest palindrome made from the product of two 3-digit numbers.
 
 -- [4,3,2,1]
 u = reverse [1,2,3,4]
 
 -- int to string
+-- "345"
 v = show 345
+
 -- string to int
+-- 345
 w = read "345" :: Int
 
 -- can reverse the string (as it is a list of chars really)
@@ -180,6 +188,22 @@ isPalindrome num = show num == reverse (show num)
 
 -- 906609
 t' = maximum [x*y | x <- [100..999], y <- [100..999], isPalindrome (x*y)]
+
+-- Euler 4 Pattern Match
+-- palin x y 
+--     | x > 999 && y > 999 = []
+--     | otherwise = (x,y) : palin (x+1) (y+1)
+
+palin x y 
+    | x > 999 && y > 999 = []
+    | x < 999 = (x,y) : palin (x+1) y
+    | y <= 999 = (x,y) : palin x (y+1)
+    -- | otherwise = (x,y) : palin (x+1) (y+1)
+
+ea = palin 100 100
+-- **HERE not quite right!***
+
+    
 
 
 
